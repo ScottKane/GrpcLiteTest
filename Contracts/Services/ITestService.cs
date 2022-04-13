@@ -6,5 +6,5 @@ namespace Contracts.Services;
 public interface ITestService
 {
     [OperationContract] string Echo(string message);
-    [OperationContract] IAsyncEnumerable<string> Subscribe(IAsyncEnumerable<string> requests);
+    [OperationContract] IObservable<string> Subscribe(IObservable<string> requests);
 }

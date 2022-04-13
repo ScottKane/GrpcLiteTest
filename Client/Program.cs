@@ -27,8 +27,7 @@ public static class Program
 
         requests.Subscribe(request => Console.WriteLine($"[Client]: {request}"));
                     
-        service.Subscribe(requests.ToAsyncEnumerable())
-            .ToObservable()
+        service.Subscribe(requests)
             .Subscribe(response => Console.WriteLine($"[Server]: {response}"));
 
         Console.WriteLine(service.Echo("Subscription created"));

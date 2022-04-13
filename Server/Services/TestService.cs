@@ -13,11 +13,9 @@ public class TestService : ITestService
         return message;
     }
     
-    public IAsyncEnumerable<string> Subscribe(IAsyncEnumerable<string> requests)
+    public IObservable<string> Subscribe(IObservable<string> requests)
     {
-        requests
-            .ToObservable()
-            .Subscribe(request => Console.WriteLine($"[Client]: {request}"));
+        requests.Subscribe(request => Console.WriteLine($"[Client]: {request}"));
 
         var responses = Observable
             .Interval(TimeSpan.FromSeconds(1))
@@ -25,6 +23,6 @@ public class TestService : ITestService
 
         responses.Subscribe(response => Console.WriteLine($"[Server]: {response}"));
         
-        return responses.ToAsyncEnumerable();
+        return responses;
     }
 }
